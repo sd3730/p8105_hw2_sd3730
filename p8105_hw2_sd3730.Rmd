@@ -29,5 +29,10 @@ The NYC Transit dataset contains details about the stations, including station n
 The data cleaning steps involved reading the CSV file, cleaning the column names using janitor, selecting relevant columns, and converting the entry variable from character values ("YES"/"NO") to a logical variable (TRUE/FALSE). The resulting dataset has dimensions of `r nrow(transit_data)` rows and `r ncol(transit_data)` columns. The dataset is considered tidy as each variable forms a column, each observation forms a row, and each type of observational unit is a table.
 
 
-
-
+```{r stations_count, message = FALSE, results = 'hide'}
+distinct_stations_count = transit_data |>
+  distinct (station_name, line) |>
+  nrow()
+distinct_stations_count
+```
+  
