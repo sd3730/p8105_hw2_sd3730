@@ -5,3 +5,8 @@ output: github_document
 ---
 
 # Question 1
+
+```{r setup, message = FALSE}
+library(tidyverse)
+transit_data = read.csv("./NYC_Transit_Subway_Entrance_And_Exit_Data.csv", na = c("NA", ".", ""))
+```
