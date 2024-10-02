@@ -12,4 +12,11 @@ library(tidyverse)
 library(dplyr)
 ```
 
+This code is to read and clean the data.
+```{r cleanup, echo = FALSE, results = 'hide'}
+transit_data = read.csv("./NYC_Transit_Subway_Entrance_And_Exit_Data.csv", 
+                          na = c("NA", ".",""))
+  janitor::clean_names(transit_data)
+```
+
 
