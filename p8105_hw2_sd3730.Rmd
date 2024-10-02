@@ -12,11 +12,12 @@ library(tidyverse)
 library(dplyr)
 ```
 
-This code is to read and clean the data.
-```{r cleanup, echo = FALSE, results = 'hide'}
+This code is to read and clean the data, keep variables, and convert the entry variable from character to logical variable.
+```{r cleanup, message = FALSE, results = 'hide'}
 transit_data = read.csv("./NYC_Transit_Subway_Entrance_And_Exit_Data.csv", 
-                          na = c("NA", ".",""))
-  janitor::clean_names(transit_data)
+                          na = c("NA", ".","")) |>
+  janitor::clean_names() |>
+  select(line, station_name, station_latitude, station_longitude, starts_with("route"), entry,
+         vending, entrance_type, ada) |>
+    mutate(entry = ifelse(entry == "YES", TRUE, FALSE)) 
 ```
-
-
