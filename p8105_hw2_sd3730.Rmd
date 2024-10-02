@@ -46,5 +46,14 @@ ada_compliant_count
 ```
 There are `r ada_compliant_count` stations that are ADA compliant.
 
+### What proportion of station entrances / exits without vending allow entrance?
+```{r no_vending, message = FALSE, results = 'hide'}
+no_vending_proportion = transit_data |>
+  filter(vending == "NO") |>
+  summarise(proportion_entry_allowed = mean(entry, na.rm = TRUE)) |>
+  pull(proportion_entry_allowed)
 
+no_vending_proportion
+```
+Proportion of Entrances/Exits without Vending that Allow Entrance: `r no_vending_proportion` of entrances/exits without vending allow entrance.
 
