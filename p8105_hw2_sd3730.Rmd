@@ -1,0 +1,7 @@
+---
+title: "p8105_hw2_sd3730"
+author: "Stacey Dai"
+output: github_document
+---
+
+# Question 1
