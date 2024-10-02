@@ -28,18 +28,23 @@ The NYC Transit dataset contains details about the stations, including station n
 
 The data cleaning steps involved reading the CSV file, cleaning the column names using janitor, selecting relevant columns, and converting the entry variable from character values ("YES"/"NO") to a logical variable (TRUE/FALSE). The resulting dataset has dimensions of `r nrow(transit_data)` rows and `r ncol(transit_data)` columns. The dataset is considered tidy as each variable forms a column, each observation forms a row, and each type of observational unit is a table.
 
-
+### How many distinct stations are there?
 ```{r stations_count, message = FALSE, results = 'hide'}
 distinct_stations_count = transit_data |>
   distinct (station_name, line) |>
   nrow()
 distinct_stations_count
 ```
+There are `r distinct_stations_count` distinct subway stations.
 
+### How many stations are ADA compliant? 
 ```{r ada_count, message = FALSE, results = 'hide'}
 ada_compliant_count = transit_data |>
   filter(ada == TRUE) |>
   nrow()
 ada_compliant_count
 ```
+There are `r ada_compliant_count` stations that are ADA compliant.
+
+
 
