@@ -181,6 +181,7 @@ glimpse(results)
 glimpse(viewers)
 ```
 
+Check for missing values.
 ```{r missing, message = FALSE, results = 'hide'}
 sum(is.na(bakers))
 sum(is.na(bakes))
@@ -188,7 +189,12 @@ sum(is.na(results))
 sum(is.na(viewers))
 ```
 
-
-
+Remove duplicates from the datasets.
+```{r remove_dup, message = FALSE, results = 'hide'}
+bakers <- bakers |> distinct()
+bakes <- bakes |> distinct()
+results <- results |> distinct()
+viewers <- viewers |> distinct()
+```
 
 
