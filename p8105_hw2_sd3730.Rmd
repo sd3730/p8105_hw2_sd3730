@@ -181,6 +181,12 @@ glimpse(results)
 glimpse(viewers)
 ```
 
+```{r missing, message = FALSE, results = 'hide'}
+sum(is.na(bakers))
+sum(is.na(bakes))
+sum(is.na(results))
+sum(is.na(viewers))
+```
 
 
 
