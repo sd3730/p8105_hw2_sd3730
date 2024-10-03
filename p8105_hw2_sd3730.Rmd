@@ -28,7 +28,7 @@ The NYC Transit dataset contains details about the stations, including station n
 
 The data cleaning steps involved reading the CSV file, cleaning the column names using janitor, selecting relevant columns, and converting the entry variable from character values ("YES"/"NO") to a logical variable (TRUE/FALSE). The resulting dataset has dimensions of `r nrow(transit_data)` rows and `r ncol(transit_data)` columns. The dataset is considered tidy as each variable forms a column, each observation forms a row, and each type of observational unit is a table.
 
-### How many distinct stations are there?
+How many distinct stations are there?
 ```{r stations_count, message = FALSE, results = 'hide'}
 distinct_stations_count = transit_data |>
   distinct (station_name, line) |>
@@ -37,7 +37,7 @@ distinct_stations_count
 ```
 There are `r distinct_stations_count` distinct subway stations.
 
-### How many stations are ADA compliant? 
+How many stations are ADA compliant? 
 ```{r ada_count, message = FALSE, results = 'hide'}
 ada_compliant_count = transit_data |>
   filter(ada == TRUE) |>
@@ -46,7 +46,7 @@ ada_compliant_count
 ```
 There are `r ada_compliant_count` stations that are ADA compliant.
 
-### What proportion of station entrances / exits without vending allow entrance?
+What proportion of station entrances / exits without vending allow entrance?
 ```{r no_vending, message = FALSE, results = 'hide'}
 no_vending_proportion = transit_data |>
   filter(vending == "NO") |>
@@ -57,3 +57,31 @@ no_vending_proportion
 ```
 Proportion of Entrances/Exits without Vending that Allow Entrance: `r no_vending_proportion` of entrances/exits without vending allow entrance.
 
+Reformat data so that route number and route name are distinct variables.
+```{r reformat, message = FALSE, results = 'hide'}
+library(tidyr)
+
+transit_data <- transit_data |>
+  mutate(across(starts_with("route"), as.character)) 
+
+transit_data_long <- transit_data |>
+  pivot_longer(cols = starts_with("route"), 
+               names_to = "route_number", 
+               values_to = "route_name", 
+               values_drop_na = TRUE)
+
+distinct_a_train_stations <- transit_data_long |>
+  filter(route_name == "A") |>
+  distinct(station_name, line) |>
+  nrow()
+
+ada_compliant_a_train_count <- transit_data_long |>
+  filter(route_name == "A", ada == TRUE) |>
+  distinct(station_name, line) |>
+  nrow()
+
+distinct_a_train_stations
+ada_compliant_a_train_count
+```
+There are `r distinct_a_train_stations` distinct stations that serve the A train. 
+Of the stations that serve the A train, there are `r ada_compliant_a_train_count` compliant stations.
