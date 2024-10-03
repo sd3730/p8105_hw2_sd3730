@@ -109,3 +109,13 @@ mr_trash_wheel = read_excel("./202409 Trash Wheel Collection Data.xlsx",
         `Sports Balls` = as.integer(round(`Sports Balls`))
     )
 ```
+
+Read and clean the Professor Trash Wheel data
+```{r prof_trash, message = FALSE, results = 'hide'}
+prof_trash_wheel = read_excel("./202409 Trash Wheel Collection Data.xlsx", 
+                                sheet = "Professor Trash Wheel", 
+                                skip = 1) |>
+    filter(!is.na(Dumpster)) |>
+    select(Date, Dumpster, `Weight (tons)`, `Cigarette Butts`) |>
+    mutate(Trash_Wheel = "Professor Trash Wheel")
+```
