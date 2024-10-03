@@ -143,3 +143,13 @@ total_weight_professor = sum(combined_data$`Weight (tons)`[combined_data$Trash_W
 ```{r total_cig_gwynnda, message = FALSE, results = 'hide'}
 total_cigarette_butts_gwynnda_june = sum(combined_data$`Cigarette Butts`[combined_data$Trash_Wheel == "Gwynnda" & format(as.Date(combined_data$Date), "%Y-%m") == "2022-06"], na.rm = TRUE)
 ```
+
+```{r total_obs, message = FALSE, results = 'hide'}
+total_observations = nrow(combined_data)
+```
+
+
+
+
+
+
