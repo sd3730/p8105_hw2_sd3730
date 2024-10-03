@@ -7,13 +7,13 @@ output: github_document
 # Question 1
 
 This code is used to set up the RMarkdown file and load necessary packages.
-```{r setup, message = FALSE}
+```{r setup_q1, message = FALSE}
 library(tidyverse)
 library(dplyr)
 ```
 
 This code is to read and clean the data, keep variables, and convert the entry variable from character to logical variable.
-```{r cleanup, message = FALSE, results = 'hide'}
+```{r cleanup_q1, message = FALSE, results = 'hide'}
 transit_data = read.csv("./NYC_Transit_Subway_Entrance_And_Exit_Data.csv", 
                           na = c("NA", ".","")) |>
   janitor::clean_names() |>
@@ -89,8 +89,23 @@ Of the stations that serve the A train, there are `r ada_compliant_a_train_count
 
 #Question 2
 
-```{r setup, message = FALSE}
+This code is used to set up the RMarkdown file and load necessary packages.
+```{r setup_q2, message = FALSE}
 library(readxl)
 library(janitor)
+library(dplyr)
 ```
 
+Read and clean the Mr. Trash Wheel data
+```{r mr_trash, message = FALSE, results = 'hide'}
+mr_trash_wheel = read_excel("./202409 Trash Wheel Collection Data.xlsx", 
+                              sheet = "Mr. Trash Wheel", 
+                              skip = 1, 
+                              col_names = TRUE) |>
+    filter(!is.na(Dumpster)) |>
+    select(Date, Dumpster, `Weight (tons)`, `Cigarette Butts`, `Sports Balls`) |>
+    mutate(
+        Trash_Wheel = "Mr. Trash Wheel",
+        `Sports Balls` = as.integer(round(`Sports Balls`))
+    )
+```
