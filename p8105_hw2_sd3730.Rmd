@@ -85,3 +85,12 @@ ada_compliant_a_train_count
 ```
 There are `r distinct_a_train_stations` distinct stations that serve the A train. 
 Of the stations that serve the A train, there are `r ada_compliant_a_train_count` compliant stations.
+
+
+#Question 2
+
+```{r setup, message = FALSE}
+library(readxl)
+library(janitor)
+```
+
